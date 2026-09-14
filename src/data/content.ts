@@ -14,12 +14,14 @@ export interface Course {
   featured?: boolean;
 }
 
+const assetBase = import.meta.env.BASE_URL;
+
 export const courses: Course[] = [
   {
     id: "data-entry",
     title: "إدخال البيانات",
     category: "التكنولوجيا",
-    image: "/images/courses/data-entry.jpg",
+    image: `${assetBase}images/courses/data-entry.jpg`,
     duration: "6 أشهر",
     hours: "600 ساعة تدريبية",
     level: "محدد المهارات / ماهر",
@@ -34,7 +36,7 @@ export const courses: Course[] = [
     id: "electrical-installations",
     title: "التمديدات الكهربائية",
     category: "الكهرباء والطاقة",
-    image: "/images/courses/electrical.jpg",
+    image: `${assetBase}images/courses/electrical.jpg`,
     duration: "8 أشهر",
     hours: "800 ساعة تدريبية",
     level: "مهني / ماهر",
@@ -49,7 +51,7 @@ export const courses: Course[] = [
     id: "childcare",
     title: "حاضنة الأطفال",
     category: "الخدمات الشخصية",
-    image: "/images/courses/childcare.jpg",
+    image: `${assetBase}images/courses/childcare.jpg`,
     duration: "6 أشهر",
     hours: "600 ساعة تدريبية",
     level: "مهني",
@@ -64,7 +66,7 @@ export const courses: Course[] = [
     id: "womens-sewing",
     title: "الخياطة النسائية",
     category: "الحرف والصناعات",
-    image: "/images/courses/sewing.jpg",
+    image: `${assetBase}images/courses/sewing.jpg`,
     duration: "8 أشهر",
     hours: "800 ساعة تدريبية",
     level: "مهني / ماهر",
@@ -79,7 +81,7 @@ export const courses: Course[] = [
     id: "mens-barber",
     title: "حلاق رجالي",
     category: "الخدمات الشخصية",
-    image: "/images/courses/barber.jpg",
+    image: `${assetBase}images/courses/barber.jpg`,
     duration: "6 أشهر",
     hours: "600 ساعة تدريبية",
     level: "مهني / ماهر",
@@ -94,7 +96,7 @@ export const courses: Course[] = [
     id: "pastry",
     title: "حلويات ومعجنات",
     category: "الضيافة والسياحة",
-    image: "/images/courses/pastry.jpg",
+    image: `${assetBase}images/courses/pastry.jpg`,
     duration: "7 أشهر",
     hours: "700 ساعة تدريبية",
     level: "مهني / ماهر",
