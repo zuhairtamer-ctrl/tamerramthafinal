@@ -278,7 +278,7 @@ export default function RegisterPage({
               className="aspect-video h-full w-full object-cover"
               aria-label="فيديو إرشادات التسجيل"
             >
-              <source src="/videos/registration-guide.mp4" type="video/mp4" />
+              <source src={`${import.meta.env.BASE_URL}videos/registration-guide.mp4`} type="video/mp4" />
               متصفحك لا يدعم تشغيل الفيديو.
             </video>
           </div>
