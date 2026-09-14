@@ -60,18 +60,21 @@ export default function Footer({ onNavigate }: { onNavigate: (p: Page) => void }
           </p>
           <div className="mt-4 flex gap-2">
             {[
-              { icon: <Share2 size={18} />, t: "فيسبوك" },
+              { icon: <Share2 size={18} />, t: "فيسبوك", href: "https://www.facebook.com/share/1KqiMDCnT5/?mibextid=wwXIfr" },
               { icon: <PlaySquare size={18} />, t: "يوتيوب" },
               { icon: <Camera size={18} />, t: "انستغرام" },
               { icon: <Globe size={18} />, t: "الموقع الرسمي" },
             ].map((s, i) => (
-              <button
+              <a
                 key={i}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
                 title={s.t}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:-translate-y-1 hover:bg-vtc-red"
               >
                 {s.icon}
-              </button>
+              </a>
             ))}
           </div>
         </div>
