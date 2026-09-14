@@ -106,11 +106,12 @@ export default function Footer({ onNavigate }: { onNavigate: (p: Page) => void }
           <h3 className="text-lg font-black text-gold-light">أشهر التخصصات</h3>
           <ul className="mt-4 space-y-2.5">
             {[
-              "ميكانيك وكهرباء المركبات",
-              "الطاقة الشمسية والكهرباء",
-              "الحلاقة والتجميل",
-              "تقنية المعلومات",
-              "فنون الطهي والحلويات",
+              "إدخال البيانات",
+              "التمديدات الكهربائية",
+              "حاضنة الأطفال",
+              "الخياطة النسائية",
+              "حلاق رجالي",
+              "حلويات ومعجنات",
             ].map((t, i) => (
               <li key={i}>
                 <button
