@@ -373,7 +373,7 @@ export default function HomePage({ onNavigate }: { onNavigate: (p: Page) => void
             </p>
             <div className="mt-6 space-y-3">
               {[
-                { icon: <Phone size={18} />, t: "الرقم الساخن / واتساب", d: "0798137070" },
+                { icon: <Phone size={18} />, t: "الرقم الساخن", d: "027395351" },
                 { icon: <MapPin size={18} />, t: "العنوان", d: "الرمثا — محافظة إربد — الأردن" },
                 { icon: <Clock size={18} />, t: "الدوام الرسمي", d: "الأحد – الخميس: 8 صباحاً – 3 مساءً" },
               ].map((c, i) => (

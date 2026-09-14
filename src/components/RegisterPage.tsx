@@ -66,6 +66,8 @@ export default function RegisterPage({
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [done, setDone] = useState(false);
   const [refNo, setRefNo] = useState("");
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     if (preselected) setForm((f) => ({ ...f, courseId: preselected }));
@@ -97,7 +99,7 @@ export default function RegisterPage({
     return Object.keys(e).length === 0;
   };
 
-  const submit = (ev: React.FormEvent) => {
+  const submit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     if (!validate()) {
       document.getElementById("register-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -105,15 +107,38 @@ export default function RegisterPage({
     }
     const ref = `VTC-RAM-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
     setRefNo(ref);
+    setSending(true);
+    setSubmitError("");
+    const courseName = courses.find((c) => c.id === form.courseId)?.title || "—";
+    const payload = {
+      ...form,
+      courseName,
+      refNo: ref,
+      _subject: `طلب تسجيل جديد - ${ref}`,
+      _template: "table",
+      _captcha: "false",
+    };
     try {
       const prev = JSON.parse(localStorage.getItem("vtc-ramtha-apps") || "[]");
-      prev.push({ ...form, refNo: ref, date: new Date().toISOString() });
+      prev.push({ ...payload, date: new Date().toISOString() });
       localStorage.setItem("vtc-ramtha-apps", JSON.stringify(prev));
     } catch {
       /* ignore */
     }
-    setDone(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/vtcalramtha@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error("email delivery failed");
+      setDone(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      setSubmitError("تعذر إرسال الطلب حالياً. تم حفظ بياناتك محلياً، يرجى المحاولة مرة أخرى أو التواصل مع المعهد على الرقم 027395351.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const courseName = courses.find((c) => c.id === form.courseId)?.title || "—";
@@ -189,7 +214,7 @@ export default function RegisterPage({
             <div className="mt-6 rounded-2xl bg-vtc-red-light p-4 text-[13.5px] font-bold leading-8 text-vtc-red-dark">
               الخطوات التالية: مراجعة المعهد في الرمثا — محافظة إربد مصطحباً الهوية الشخصية
               وصورة عن المؤهل العلمي، أو انتظر اتصال المرشد المهني على الرقم الأول المسجل.
-              للاستفسار: 0798137070
+              للاستفسار: 027395351
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <button
@@ -411,13 +436,15 @@ export default function RegisterPage({
 
             <button
               type="submit"
-              className="group mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-l from-vtc-red to-vtc-red-dark py-4.5 text-lg font-black text-white shadow-2xl shadow-red-600/25 transition-all hover:-translate-y-0.5 hover:shadow-red-600/40"
+              disabled={sending}
+              className="group mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-l from-vtc-red to-vtc-red-dark py-4.5 text-lg font-black text-white shadow-2xl shadow-red-600/25 transition-all hover:-translate-y-0.5 hover:shadow-red-600/40 disabled:cursor-wait disabled:opacity-60"
               style={{ paddingTop: "1rem", paddingBottom: "1rem" }}
             >
               <CheckCircle2 size={22} />
-              إرسال طلب التسجيل
+              {sending ? "جارٍ إرسال الطلب..." : "إرسال طلب التسجيل"}
               <ChevronLeft size={20} className="transition-transform group-hover:-translate-x-1" />
             </button>
+            {submitError && <p className="mt-3 rounded-xl bg-vtc-red-light p-3 text-center text-[13px] font-bold leading-7 text-vtc-red-dark">{submitError}</p>}
             <p className="mt-3 flex items-center justify-center gap-1.5 text-[12.5px] font-bold text-ink-soft/50">
               <ShieldCheck size={14} /> بياناتك محمية وتُستخدم لأغراض التسجيل فقط
             </p>
@@ -471,11 +498,11 @@ export default function RegisterPage({
               <div className="mt-4 space-y-2 text-[14px] font-black">
                 <div className="flex items-center justify-between rounded-xl bg-sand px-4 py-3">
                   <span className="text-ink-soft/60">الرقم الساخن</span>
-                  <span className="text-vtc-red" dir="ltr">0798137070</span>
+                  <span className="text-vtc-red" dir="ltr">027395351</span>
                 </div>
                 <div className="flex items-center justify-between rounded-xl bg-sand px-4 py-3">
                   <span className="text-ink-soft/60">المنصة الرسمية</span>
-                  <span className="text-[12.5px] text-jordan-green" dir="ltr">ereg.vtc.gov.jo</span>
+                  <a href="https://ereg.vtc.gov.jo" target="_blank" rel="noreferrer" className="text-[12.5px] text-jordan-green underline-offset-4 hover:underline" dir="ltr">ereg.vtc.gov.jo</a>
                 </div>
               </div>
               <button

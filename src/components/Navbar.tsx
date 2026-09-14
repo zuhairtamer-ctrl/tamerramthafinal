@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Home, Info, GraduationCap, ClipboardList, Menu, X, Phone } from "lucide-react";
+import { Home, Info, GraduationCap, ClipboardList, Menu, X, Phone, ExternalLink } from "lucide-react";
 import Logo from "./Logo";
 
 export type Page = "home" | "about" | "courses" | "register";
@@ -38,7 +38,7 @@ export default function Navbar({ page, onNavigate }: NavbarProps) {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-[12.5px]">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-gold-light">
-              <Phone size={13} /> الخط الساخن: <bdi className="font-bold text-white">0798137070</bdi>
+              <Phone size={13} /> الخط الساخن: <bdi className="font-bold text-white">027395351</bdi>
             </span>
             <span className="hidden items-center gap-1.5 sm:flex">
               <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
@@ -86,12 +86,14 @@ export default function Navbar({ page, onNavigate }: NavbarProps) {
                 {l.label}
               </button>
             ))}
-            <button
-              onClick={() => go("register")}
-              className="glow-pulse mr-2 rounded-full bg-gradient-to-l from-gold-dark via-gold to-gold-dark bg-[length:200%_auto] px-6 py-2.5 text-[15px] font-black text-white shadow-lg transition-all hover:bg-right"
+            <a
+              href="https://ereg.vtc.gov.jo"
+              target="_blank"
+              rel="noreferrer"
+              className="mr-2 flex items-center gap-2 rounded-full bg-gradient-to-l from-gold-dark via-gold to-gold-dark bg-[length:200%_auto] px-5 py-2.5 text-[15px] font-black text-white shadow-lg transition-all hover:bg-right"
             >
-              سجّل الآن
-            </button>
+              <ExternalLink size={16} /> التسجيل الإلكتروني
+            </a>
           </nav>
 
           <button

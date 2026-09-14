@@ -9,7 +9,6 @@ import {
   PlaySquare,
   Camera,
   ArrowUp,
-  MessageCircle,
 } from "lucide-react";
 import Logo from "./Logo";
 import type { Page } from "./Navbar";
@@ -25,15 +24,6 @@ export function FloatingButtons() {
 
   return (
     <div className="fixed bottom-6 left-6 z-[60] flex flex-col gap-3 print:hidden">
-      <a
-        href="https://wa.me/962798137070"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="واتساب"
-        className="pulse-ring relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-2xl transition-transform hover:scale-110"
-      >
-        <MessageCircle size={26} />
-      </a>
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="العودة للأعلى"
@@ -94,6 +84,7 @@ export default function Footer({ onNavigate }: { onNavigate: (p: Page) => void }
               { t: "عن المعهد والمؤسسة", p: "about" as Page },
               { t: "الدورات التدريبية", p: "courses" as Page },
               { t: "تسجيل طالب جديد", p: "register" as Page },
+              { t: "التسجيل الإلكتروني E-reg", p: "register" as Page },
             ].map((l, i) => (
               <li key={i}>
                 <button
@@ -106,6 +97,9 @@ export default function Footer({ onNavigate }: { onNavigate: (p: Page) => void }
               </li>
             ))}
           </ul>
+          <a href="https://ereg.vtc.gov.jo" target="_blank" rel="noreferrer" className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-gold py-3 text-sm font-black text-ink hover:bg-gold-light">
+            التسجيل الإلكتروني E-reg
+          </a>
         </div>
 
         <div>
@@ -136,12 +130,11 @@ export default function Footer({ onNavigate }: { onNavigate: (p: Page) => void }
           <ul className="mt-4 space-y-3 text-[13.5px] font-bold text-white/75">
             <li className="flex items-start gap-2.5">
               <MapPin size={17} className="mt-0.5 shrink-0 text-vtc-red" />
-              لواء الرمثا — محافظة إربد
-              <br />
+              <a href="https://maps.app.goo.gl/PpTp1EvuK6i7ddSKA" target="_blank" rel="noreferrer" className="underline-offset-4 hover:text-gold-light hover:underline">لواء الرمثا — محافظة إربد<br />عرض الموقع على الخريطة</a>
             </li>
             <li className="flex items-center gap-2.5" dir="ltr">
               <Phone size={17} className="shrink-0 text-vtc-red" />
-              <span className="tracking-wider">0798137070</span>
+              <span className="tracking-wider">027395351</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Clock size={17} className="mt-0.5 shrink-0 text-vtc-red" />
@@ -149,7 +142,7 @@ export default function Footer({ onNavigate }: { onNavigate: (p: Page) => void }
             </li>
             <li className="flex items-center gap-2.5" dir="ltr">
               <Globe size={17} className="shrink-0 text-vtc-red" />
-              <span className="text-[12.5px]">ereg.vtc.gov.jo</span>
+              <a href="https://ereg.vtc.gov.jo" target="_blank" rel="noreferrer" className="text-[12.5px] text-gold-light underline-offset-4 hover:underline">ereg.vtc.gov.jo</a>
             </li>
           </ul>
           <button
