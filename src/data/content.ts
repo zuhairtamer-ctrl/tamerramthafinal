@@ -49,7 +49,7 @@ export const courses: Course[] = [
     id: "childcare",
     title: "حاضنة الأطفال",
     category: "الخدمات الشخصية",
-    image: "/images/courses/childcare.jpeg",
+    image: "/images/courses/childcare.jpg",
     duration: "6 أشهر",
     hours: "600 ساعة تدريبية",
     level: "مهني",
