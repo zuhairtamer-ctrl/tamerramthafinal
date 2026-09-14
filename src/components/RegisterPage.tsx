@@ -54,6 +54,35 @@ const initial: FormState = {
 const inputCls =
   "w-full rounded-2xl border-2 border-sand-dark bg-white py-3.5 pl-4 pr-12 text-[15px] font-bold text-ink outline-none transition-all placeholder:font-bold placeholder:text-ink-soft/35 focus:border-vtc-red focus:ring-4 focus:ring-vtc-red/10";
 
+function FormField({
+  icon,
+  label,
+  error,
+  children,
+  required,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+  required?: boolean;
+}) {
+  return (
+    <div>
+      <label className="mb-1.5 flex items-center gap-1.5 text-[14px] font-black text-ink">
+        <span className="text-vtc-red">{icon}</span> {label}
+        {required && <span className="text-vtc-red">*</span>}
+      </label>
+      <div className="relative">{children}</div>
+      {error && (
+        <p className="mt-1.5 flex items-center gap-1 text-[12.5px] font-bold text-vtc-red">
+          <AlertCircle size={14} /> {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function RegisterPage({
   onNavigate,
   preselected,
@@ -143,33 +172,6 @@ export default function RegisterPage({
 
   const courseName = courses.find((c) => c.id === form.courseId)?.title || "—";
 
-  const Field = ({
-    icon,
-    label,
-    error,
-    children,
-    required,
-  }: {
-    icon: React.ReactNode;
-    label: string;
-    error?: string;
-    children: React.ReactNode;
-    required?: boolean;
-  }) => (
-    <div>
-      <label className="mb-1.5 flex items-center gap-1.5 text-[14px] font-black text-ink">
-        <span className="text-vtc-red">{icon}</span> {label}
-        {required && <span className="text-vtc-red">*</span>}
-      </label>
-      <div className="relative">{children}</div>
-      {error && (
-        <p className="mt-1.5 flex items-center gap-1 text-[12.5px] font-bold text-vtc-red">
-          <AlertCircle size={14} /> {error}
-        </p>
-      )}
-    </div>
-  );
-
   /* ===== شاشة النجاح ===== */
   if (done) {
     return (
@@ -255,17 +257,31 @@ export default function RegisterPage({
         </div>
         <div className="absolute inset-0 bg-gradient-to-l from-ink via-ink/90 to-ink/60" />
         <div className="dot-grid absolute inset-0 opacity-30" />
-        <div className="relative mx-auto max-w-7xl px-4">
-          <div className="flex items-center gap-2 text-[13px] font-bold text-gold-light">
-            الرئيسية <ChevronLeft size={14} /> تسجيل طالب جديد
+        <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 lg:flex-row-reverse lg:items-center lg:justify-between">
+          <div className="lg:w-[48%]">
+            <div className="flex items-center gap-2 text-[13px] font-bold text-gold-light">
+              الرئيسية <ChevronLeft size={14} /> تسجيل طالب جديد
+            </div>
+            <h1 className="font-ruqaa mt-3 text-4xl text-white sm:text-5xl">
+              استمارة التسجيل في الدورات
+            </h1>
+            <p className="mt-3 max-w-2xl leading-8 text-white/75">
+              املأ البيانات التالية بدقة — الحقول المميزة بـ <span className="text-vtc-red font-black">*</span> مطلوبة.
+              بعد الإرسال ستحصل على رقم مرجعي لمتابعة طلبك.
+            </p>
           </div>
-          <h1 className="font-ruqaa mt-3 text-4xl text-white sm:text-5xl">
-            استمارة التسجيل في الدورات
-          </h1>
-          <p className="mt-3 max-w-2xl leading-8 text-white/75">
-            املأ البيانات التالية بدقة — الحقول المميزة بـ <span className="text-vtc-red font-black">*</span> مطلوبة.
-            بعد الإرسال ستحصل على رقم مرجعي لمتابعة طلبك.
-          </p>
+          <div className="relative overflow-hidden rounded-3xl bg-[#fff000] shadow-2xl ring-4 ring-white/10 lg:w-[48%]">
+            <video
+              controls
+              preload="metadata"
+              playsInline
+              className="aspect-video h-full w-full object-cover"
+              aria-label="فيديو إرشادات التسجيل"
+            >
+              <source src="/videos/registration-guide.mp4" type="video/mp4" />
+              متصفحك لا يدعم تشغيل الفيديو.
+            </video>
+          </div>
         </div>
       </section>
 
@@ -285,7 +301,7 @@ export default function RegisterPage({
 
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="sm:col-span-2">
-                <Field icon={<User size={18} />} label="اسم الطالب الرباعي" error={errors.name} required>
+                <FormField icon={<User size={18} />} label="اسم الطالب الرباعي" error={errors.name} required>
                   <User size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-soft/35" />
                   <input
                     value={form.name}
@@ -293,10 +309,10 @@ export default function RegisterPage({
                     placeholder="مثال: محمد عبدالله أحمد الزعبي"
                     className={inputCls}
                   />
-                </Field>
+                </FormField>
               </div>
 
-              <Field icon={<IdCard size={18} />} label="الرقم الوطني" error={errors.nationalId} required>
+              <FormField icon={<IdCard size={18} />} label="الرقم الوطني" error={errors.nationalId} required>
                 <IdCard size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-soft/35" />
                 <input
                   value={form.nationalId}
@@ -306,9 +322,9 @@ export default function RegisterPage({
                   dir="ltr"
                   className={`${inputCls} text-left tracking-widest`}
                 />
-              </Field>
+              </FormField>
 
-              <Field icon={<CalendarDays size={18} />} label="تاريخ الميلاد" error={errors.birth} required>
+              <FormField icon={<CalendarDays size={18} />} label="تاريخ الميلاد" error={errors.birth} required>
                 <CalendarDays size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-soft/35" />
                 <input
                   type="date"
@@ -317,9 +333,9 @@ export default function RegisterPage({
                   onChange={(e) => set(e.target.value, "birth")}
                   className={inputCls}
                 />
-              </Field>
+              </FormField>
 
-              <Field icon={<Phone size={18} />} label="رقم الهاتف الأول" error={errors.phone1} required>
+              <FormField icon={<Phone size={18} />} label="رقم الهاتف الأول" error={errors.phone1} required>
                 <Phone size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-soft/35" />
                 <input
                   value={form.phone1}
@@ -329,9 +345,9 @@ export default function RegisterPage({
                   dir="ltr"
                   className={`${inputCls} text-left tracking-widest`}
                 />
-              </Field>
+              </FormField>
 
-              <Field icon={<PhoneCall size={18} />} label="رقم الهاتف الثاني" error={errors.phone2} required>
+              <FormField icon={<PhoneCall size={18} />} label="رقم الهاتف الثاني" error={errors.phone2} required>
                 <PhoneCall size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-soft/35" />
                 <input
                   value={form.phone2}
@@ -341,9 +357,9 @@ export default function RegisterPage({
                   dir="ltr"
                   className={`${inputCls} text-left tracking-widest`}
                 />
-              </Field>
+              </FormField>
 
-              <Field icon={<VenusAndMars size={18} />} label="الجنس" error={errors.gender} required>
+              <FormField icon={<VenusAndMars size={18} />} label="الجنس" error={errors.gender} required>
                 <div className="grid grid-cols-2 gap-2">
                   {["ذكر", "أنثى"].map((g) => (
                     <button
@@ -360,9 +376,9 @@ export default function RegisterPage({
                     </button>
                   ))}
                 </div>
-              </Field>
+              </FormField>
 
-              <Field icon={<BookOpenCheck size={18} />} label="المؤهل العلمي" error={errors.qualification} required>
+              <FormField icon={<BookOpenCheck size={18} />} label="المؤهل العلمي" error={errors.qualification} required>
                 <BookOpenCheck size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-soft/35" />
                 <select value={form.qualification} onChange={(e) => set(e.target.value, "qualification")} className={`${inputCls} appearance-none`}>
                   <option value="">— اختر المؤهل —</option>
@@ -372,10 +388,10 @@ export default function RegisterPage({
                   <option>دبلوم كليات مجتمع</option>
                   <option>بكالوريوس فأعلى</option>
                 </select>
-              </Field>
+              </FormField>
 
               <div className="sm:col-span-2">
-                <Field icon={<GraduationCap size={18} />} label="الدورة التدريبية المطلوبة" error={errors.courseId} required>
+                <FormField icon={<GraduationCap size={18} />} label="الدورة التدريبية المطلوبة" error={errors.courseId} required>
                   <GraduationCap size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-soft/35" />
                   <select value={form.courseId} onChange={(e) => set(e.target.value, "courseId")} className={`${inputCls} appearance-none`}>
                     <option value="">— اختر التخصص —</option>
@@ -383,10 +399,10 @@ export default function RegisterPage({
                       <option key={c.id} value={c.id}>{c.title} — {c.duration}</option>
                     ))}
                   </select>
-                </Field>
+                </FormField>
               </div>
 
-              <Field icon={<Sun size={18} />} label="الفترة المفضلة">
+              <FormField icon={<Sun size={18} />} label="الفترة المفضلة">
                 <div className="grid grid-cols-2 gap-2">
                   {["صباحي", "مسائي"].map((p) => (
                     <button
@@ -403,9 +419,9 @@ export default function RegisterPage({
                     </button>
                   ))}
                 </div>
-              </Field>
+              </FormField>
 
-              <Field icon={<FileText size={18} />} label="ملاحظات إضافية">
+              <FormField icon={<FileText size={18} />} label="ملاحظات إضافية">
                 <textarea
                   value={form.notes}
                   onChange={(e) => set(e.target.value, "notes")}
@@ -413,7 +429,7 @@ export default function RegisterPage({
                   rows={1}
                   className={`${inputCls} resize-none !pr-12`}
                 />
-              </Field>
+              </FormField>
             </div>
 
             <label className="mt-6 flex cursor-pointer items-start gap-3 rounded-2xl bg-sand p-4 ring-1 ring-sand-dark">
