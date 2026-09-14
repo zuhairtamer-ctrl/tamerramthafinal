@@ -15,21 +15,21 @@ import type { Page } from "./Navbar";
 const slides = [
   {
     image:
-      "https://images.pexels.com/photos/5265332/pexels-photo-5265332.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${import.meta.env.BASE_URL}images/site/hero-training.jpg`,
     tag: "التدريب العملي",
     title: "مهنتك… مستقبلك",
     text: "مشاغل مجهزة بأحدث التقنيات وتدريب عملي مكثف بإشراف نخبة المدربين",
   },
   {
     image:
-      "https://images.pexels.com/photos/15997176/pexels-photo-15997176.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${import.meta.env.BASE_URL}images/site/jerash.jpg`,
     tag: "إربد — عروس الشمال",
     title: "في قلب الحضارة",
     text: "معهد الرمثا يخدم أبناء الشمال وسط عبق التاريخ والحضارة الأردنية العريقة",
   },
   {
     image:
-      "https://images.pexels.com/photos/4254164/pexels-photo-4254164.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${import.meta.env.BASE_URL}images/site/hero-workshop.jpg`,
     tag: "تخصصات المستقبل",
     title: "واكب سوق العمل",
     text: "الطاقة الشمسية، تقنية المعلومات، صيانة المركبات وأكثر من 12 تخصصاً مطلوباً",

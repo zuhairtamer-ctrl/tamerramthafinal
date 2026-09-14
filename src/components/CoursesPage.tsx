@@ -39,7 +39,7 @@ export default function CoursesPage({ onNavigate }: { onNavigate: (p: Page, cour
       <section className="relative overflow-hidden bg-ink py-16">
         <div className="absolute inset-0 opacity-25">
           <img
-            src="https://images.pexels.com/photos/12114680/pexels-photo-12114680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+            src={`${import.meta.env.BASE_URL}images/site/courses-bg.jpg`}
             alt="مشاغل التدريب"
             className="h-full w-full object-cover"
           />

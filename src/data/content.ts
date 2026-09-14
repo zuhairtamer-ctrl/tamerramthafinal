@@ -130,37 +130,37 @@ export interface GalleryItem {
 export const gallery: GalleryItem[] = [
   {
     image:
-      "https://images.pexels.com/photos/15997176/pexels-photo-15997176.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${assetBase}images/site/jerash.jpg`,
     title: "جرش — مدينة الأعمدة",
     subtitle: "من أهم المدن الأثرية الرومانية قرب محافظة إربد",
   },
   {
     image:
-      "https://images.pexels.com/photos/30096127/pexels-photo-30096127.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${assetBase}images/site/pella.jpg`,
     title: "طبقة فحل — الأغوار الشمالية",
     subtitle: "آثار عريقة في محافظة إربد تعود لآلاف السنين",
   },
   {
     image:
-      "https://images.pexels.com/photos/17472761/pexels-photo-17472761.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${assetBase}images/site/petra.jpg`,
     title: "البتراء — المدينة الوردية",
     subtitle: "إحدى عجائب الدنيا السبع ورمز التراث الأردني",
   },
   {
     image:
-      "https://images.pexels.com/photos/18717602/pexels-photo-18717602.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${assetBase}images/site/roman-street.jpg`,
     title: "المدرج والشارع المُعمّد",
     subtitle: "شواهد الحضارة في شمال المملكة الأردنية",
   },
   {
     image:
-      "https://images.pexels.com/photos/18682593/pexels-photo-18682593.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${assetBase}images/site/umayyad-palace.jpg`,
     title: "القصر الأموي — عمّان",
     subtitle: "عبق التاريخ الإسلامي في قلب العاصمة",
   },
   {
     image:
-      "https://images.pexels.com/photos/14731635/pexels-photo-14731635.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      `${assetBase}images/site/mansaf.jpg`,
     title: "المنسف الأردني",
     subtitle: "الطبق الوطني وكرم الضيافة الحورانية الأصيلة",
   },

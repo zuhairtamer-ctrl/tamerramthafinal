@@ -53,7 +53,7 @@ export default function AboutPage({ onNavigate }: { onNavigate: (p: Page) => voi
       <section className="relative overflow-hidden bg-ink py-16">
         <div className="absolute inset-0 opacity-25">
           <img
-            src="https://images.pexels.com/photos/18717602/pexels-photo-18717602.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+            src={`${import.meta.env.BASE_URL}images/site/roman-street.jpg`}
             alt="آثار جرش"
             className="h-full w-full object-cover"
           />
@@ -287,7 +287,7 @@ export default function AboutPage({ onNavigate }: { onNavigate: (p: Page) => voi
           </div>
           <div className="reveal overflow-hidden rounded-[2rem] shadow-2xl lg:col-span-2">
             <img
-              src="https://images.pexels.com/photos/10551343/pexels-photo-10551343.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+              src={`${import.meta.env.BASE_URL}images/site/about-workshop.jpg`}
               alt="التدريب العملي في المشاغل"
               className="h-64 w-full object-cover sm:h-72"
             />

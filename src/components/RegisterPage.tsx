@@ -250,7 +250,7 @@ export default function RegisterPage({
       <section className="relative overflow-hidden bg-ink py-16">
         <div className="absolute inset-0 opacity-20">
           <img
-            src="https://images.pexels.com/photos/10558598/pexels-photo-10558598.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+            src={`${import.meta.env.BASE_URL}images/site/registration-bg.jpg`}
             alt="التسجيل"
             className="h-full w-full object-cover"
           />
